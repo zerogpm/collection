@@ -68,9 +68,16 @@ class Genus
      */
     private $notes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="User")
+     * @ORM\JoinTable(name="genus_scientist")
+     */
+    private $genusScientists;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
+        $this->genusScientists = new ArrayCollection();
     }
 
     public function getId()
@@ -170,5 +177,12 @@ class Genus
         $this->slug = $slug;
     }
 
-
+    public function addGenusScientist(User $user)
+    {
+        //check if the middle table have the same user
+        if ($this->genusScientists->contains($user)) {
+            return;
+        }
+        $this->genusScientists[] = $user;
+    }
 }

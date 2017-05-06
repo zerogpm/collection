@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Genus;
 use AppBundle\Entity\GenusNote;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,6 +35,11 @@ class GenusController extends Controller
         $genusNote->setNote('I counted 8 legs... as they wrapped around me');
         $genusNote->setCreatedAt(new \DateTime('-1 month'));
         $genusNote->setGenus($genus);
+
+        $user = $em->getRepository('AppBundle:User')
+            ->findOneBy(['email' => 'aquanaut1@example.org']);
+
+        $genus->addGenusScientist($user);
 
         $em->persist($genus);
         $em->persist($genusNote);
