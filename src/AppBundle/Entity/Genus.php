@@ -212,5 +212,12 @@ class Genus
     {
         return $this->genusScientists;
     }
+    
+    public function getExpertScientists()
+    {
+        return $this->getGenusScientists()->filter(function (GenusScientist $genusScientist) {
+           return $genusScientist->getYearsStudied() > 20;
+        });
+    }
 
 }
