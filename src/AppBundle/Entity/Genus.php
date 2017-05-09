@@ -73,7 +73,8 @@ class Genus
      *     targetEntity="GenusScientist",
      *     mappedBy="genus",
      *     fetch="EXTRA_LAZY",
-     *     orphanRemoval=true
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
      * )
      */
     private $genusScientists;
@@ -181,15 +182,15 @@ class Genus
         $this->slug = $slug;
     }
 
-    public function addGenusScientist(User $user)
+    public function addGenusScientist(GenusScientist $genusScientist)
     {
         //check if the middle table have the same user
-        if ($this->genusScientists->contains($user)) {
+        if ($this->genusScientists->contains($genusScientist)) {
             return;
         }
-        $this->genusScientists[] = $user;
-        //not needed for persistence, just keeping both side in sync
-        $user->addStudiedGenus($this);
+        $this->genusScientists[] = $genusScientist;
+        //needed to update the owning side of the relationship
+        $genusScientist->setGenus($this);
     }
 
     public function removeGenusScientist(GenusScientist $genusScientist)
