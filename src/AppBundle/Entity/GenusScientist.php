@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="genus_scientist")
  * @UniqueEntity(
- *     fields={"genus", "user"}
+ *     fields={"genus", "user"},
  *     message="This user is already studying this genus",
  *     errorPath="user"
  * )
