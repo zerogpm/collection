@@ -58,6 +58,14 @@ Now check out the site at `http://localhost:8000`
 
 Have fun!
 
+Login http://localhost:8000/admin/genus
+
+```
+weaverryan+1@gmail.com
+
+iliketurtles
+```
+
 ## Have some Ideas or Feedback?
 
 And as always, thanks so much for your support and letting us do what
